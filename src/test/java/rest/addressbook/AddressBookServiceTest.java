@@ -262,7 +262,6 @@ public class AddressBookServiceTest {
         //////////////////////////////////////////////////////////////////////
 
         // Repeat put and check that return same response
-
         response = client
                 .target("http://localhost:8282/contacts/person/2")
                 .request(MediaType.APPLICATION_JSON)
