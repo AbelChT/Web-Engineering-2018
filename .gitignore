@@ -3,3 +3,7 @@ build/
 *.iml
 out/
 .idea/
+
+# Dependency directories
+node_modules/
+

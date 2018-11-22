@@ -1,7 +1,33 @@
-[![Build Status](https://travis-ci.org/UNIZAR-30246-WebEngineering/lab3-restful-ws.svg?branch=master)](https://travis-ci.org/UNIZAR-30246-WebEngineering/lab3-restful-ws)
-# Web Engineering 2018-2019 / RESTful Web services
-Please, go to the [Wiki](https://github.com/UNIZAR-30246-WebEngineering/lab3-restful-ws/wiki) in order to get the instructions for this assignment.
+# What's new
+- The API have been specified with Swagger and a Swagger UI instance have been added to the project to try it.
+- The project have been modified to allow CORS.
 
-| NIA    | User name | Repo | Build Status | Improvement | Score
-|--------|-----------|------|--------------|-------------|--------
-|        |           |      |              |             |
+# Where is the open api specification?
+The open api specification is located at swagger-api/API
+
+# How you can try it
+## Requirements
+- Nodejs
+- npm
+
+## Steps
+First of all clone the repo.
+```
+$ git clone https://github.com/AbelChT/lab3-restful-ws.git
+$ cd lab3-restful-ws
+$ git checkout bonus
+```
+
+The next step is to open the server in one terminal.
+```
+$ ./gradlew serve
+```
+
+Now open other terminal, there we will execute the Swagger UI server.
+```
+$ cd lab3-restful-ws
+$ cd swagger-api
+$ npm start
+```
+
+After both process being runing, you can open the address localhost:3000/docs in your browser and try it.
