@@ -57,7 +57,7 @@ public class ElizaServerTest {
 
 	@Test(timeout = 1000)
 	public void onChat() throws DeploymentException, IOException, URISyntaxException, InterruptedException {
-		// Latch equals to 4 because we will wait the first doctor response
+		// Latch equals to 5 because we will wait the first doctor response (2 messages)
 		CountDownLatch latch = new CountDownLatch(5);
 		List<String> list = new ArrayList<>();
 		ClientEndpointConfig configuration = ClientEndpointConfig.Builder.create().build();
