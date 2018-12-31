@@ -6,13 +6,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class Router extends RouteBuilder {
 
-  @Override
-  public void configure() {
-    from("direct:search")
-            .to("twitter://search?consumerKey={{twitter.consumerKey}}&"
-                    + "consumerSecret={{twitter.consumerSecret}}&"
-                    + "accessToken={{twitter.accessToken}}&"
-                    + "accessTokenSecret={{twitter.accessTokenSecret}}");
-  }
+    @Override
+    public void configure() {
+        from("direct:timeline")
+                .to("twitter://timeline/user?consumerKey={{twitter.consumerKey}}&"
+                        + "consumerSecret={{twitter.consumerSecret}}&"
+                        + "accessToken={{twitter.accessToken}}&"
+                        + "accessTokenSecret={{twitter.accessTokenSecret}}");
 
+
+                from("twitter://timeline/home?consumerKey={{twitter.consumerKey}}&"
+                        + "consumerSecret={{twitter.consumerSecret}}&"
+                        + "accessToken={{twitter.accessToken}}&"
+                        + "accessTokenSecret={{twitter.accessTokenSecret}}").to("direct:timeline-consult");
+    }
 }
