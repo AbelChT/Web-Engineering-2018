@@ -7,6 +7,7 @@ Eureka server | ![eureka](screens/2s_eureka_iw.png) | ![eureka](screens/2s_eurek
 
 # A second account microservice is running in the port 4444 and it is registered (a fourth terminal, log screenshots).
 To accomplish that, the [application.yml](./accounts/src/main/resources/application.yml) file of the account microservice was modified.
+
 Web interface |  Logs
 :-------------------------:|:-------------------------:
 ![all](screens/3s_eureka_iw.png) | ![all](screens/3s_all_log.png)
