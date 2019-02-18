@@ -1,0 +1,28 @@
+apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'idea'
+
+repositories {
+	mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+   compile "org.glassfish.jersey.containers:jersey-container-grizzly2-http:${jersey_version}"
+   compile "org.glassfish.jersey.core:jersey-common:${jersey_version}"
+   compile "org.glassfish.jersey.core:jersey-server:${jersey_version}"
+   compile "org.glassfish.jersey.containers:jersey-container-servlet:${jersey_version}" 
+   compile "org.glassfish.jersey.inject:jersey-hk2:${jersey_version}"
+   compile "org.glassfish.jersey.media:jersey-media-moxy:${jersey_version}"
+   testCompile 'junit:junit:4.11'
+}
+
+task server(type: JavaExec) {
+	standardInput 	= System.in  
+    group 			= 'Addressbook Service'
+    description 	= 'Start a REST endpoint'
+    main 			= 'rest.addressbook.Server'
+	classpath 		= sourceSets.main.runtimeClasspath
+}
