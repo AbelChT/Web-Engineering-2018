@@ -1,0 +1,193 @@
+openapi: 3.0.0
+servers:
+  - description: Localhost
+    url: http://localhost:8080
+info:
+  description: A service that manipulates contacts in an address book
+  version: "1.0.0"
+  title: AddressBook API
+tags:
+  - name: contacts
+    description: Manipulates contacts in the address book
+paths:
+  /contacts:
+    get:
+      tags:
+        - contacts
+      summary: return the address book
+      operationId: getAddressBook
+      description: return the address book
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressBook'
+    post:
+      tags:
+        - contacts
+      summary: add a new entry to the address book
+      operationId: addPerson
+      description: add a new entry to the address book
+      requestBody:
+        required: true
+        description: posted entity
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonPost'
+      responses:
+        '201':
+          description: item created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+  '/contacts/person/{id}':
+    get:
+      tags:
+        - contacts
+      summary: return a entry from the address book
+      operationId: getPerson
+      description: return a entry from the address book
+      parameters:
+        - in: path
+          name: id
+          description: the unique identifier of a person
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        '404':
+            description: 'Not found'
+    put:
+      tags:
+        - contacts
+      summary: update a entry if exists
+      operationId: updatePerson
+      description: update a entry if exists
+      parameters:
+        - in: path
+          name: id
+          description: the unique identifier of a person
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        description: posted entity
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonPost'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        '400':
+            description: 'Bad request'
+    delete:
+      tags:
+        - contacts
+      summary: delete a entry if exists
+      operationId: updatePerson
+      description: delete a entry if exists
+      parameters:
+        - in: path
+          name: id
+          description: the unique identifier of a person
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Success
+        '404':
+            description: 'Not found'
+components:
+  schemas:
+    Person:
+      type: object
+      description: A person entry in an address book
+      required:
+        - name
+        - email
+        - id
+        - href
+        - phoneList
+      properties:
+        name:
+          type: string
+          example: "Prueba"
+        id:
+          type: integer
+          example: 1
+        email:
+          type: string
+          example: "Pr@ue.ba"
+        href:
+          type: string
+          example: "http://Prue.ba"
+        phoneList:
+          type: array
+          items:
+            $ref: '#/components/schemas/PhoneNumber'
+    PersonPost:
+      type: object
+      description: A person entry in an address book
+      required:
+        - name
+        - email
+        - phoneList
+      properties:
+        name:
+          type: string
+          example: "Prueba"
+        email:
+          type: string
+          example: "Pr@ue.ba"
+        phoneList:
+          type: array
+          items:
+            $ref: '#/components/schemas/PhoneNumber'
+    AddressBook:
+      type: object
+      required:
+        - nextId
+        - personList
+      description: A really simple Address Book.
+      properties:
+        nextId:
+          type: integer
+          description: The value of next unique identifier
+          example: 1
+        personList:
+          type: array
+          description: The list of persons in the address book
+          items:
+            $ref: '#/components/schemas/Person'
+    PhoneNumber:
+      type: object
+      required:
+        - number
+        - type
+      properties:
+        number:
+          type: string
+          example: "666666666"
+        type:
+          type: string
+          enum: 
+            - MOBILE
+            - HOME
+            - WORK
